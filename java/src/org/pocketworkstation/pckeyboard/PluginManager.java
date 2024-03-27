@@ -152,12 +152,12 @@ public class PluginManager extends BroadcastReceiver {
                         if (current == XmlResourceParser.START_TAG) {
                             String tag = xrp.getName();
                             if (tag != null) {
-                                if (tag.equals("Dictionary")) {
+                                if ("Dictionary".equals(tag)) {
                                     lang = xrp.getAttributeValue(null, "locale");
                                     String convLang = SOFTKEYBOARD_LANG_MAP.get(lang);
                                     if (convLang != null) lang = convLang;
                                     String type = xrp.getAttributeValue(null, "type");
-                                    if (type == null || type.equals("raw") || type.equals("binary")) {
+                                    if (type == null || "raw".equals(type) || "binary".equals(type)) {
                                         assetName = xrp.getAttributeValue(null, "dictionaryAssertName"); // sic
                                     } else {
                                         Log.w(TAG, "Unsupported AnySoftKeyboard dict type " + type);

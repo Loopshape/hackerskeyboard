@@ -117,7 +117,7 @@ public class LatinIMESettings extends PreferenceActivity
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         (new BackupManager(this)).dataChanged();
         // If turning on voice input, show dialog
-        if (key.equals(VOICE_SETTINGS_KEY) && !mVoiceOn) {
+        if (VOICE_SETTINGS_KEY.equals(key) && !mVoiceOn) {
             if (!prefs.getString(VOICE_SETTINGS_KEY, mVoiceModeOff)
                     .equals(mVoiceModeOff)) {
                 showVoiceConfirmation();
