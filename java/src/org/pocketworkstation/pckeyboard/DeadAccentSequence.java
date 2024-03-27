@@ -1039,14 +1039,14 @@ public class DeadAccentSequence extends ComposeBase {
     	String composed = executeToString(code);
     	if (composed != null) {
     	        //Log.i(TAG, "composed=" + composed + " len=" + composed.length());
-    		if (composed.equals("")) {
+    		if ("".equals(composed)) {
     			// Unrecognised - try to use the built-in Java text normalisation
     			int c = composeBuffer.codePointAt(composeBuffer.length() - 1);
     			if (Character.getType(c) != Character.NON_SPACING_MARK) {
     				// Put the combining character(s) at the end, else this won't work
     				composeBuffer.reverse();
     				composed = Normalizer.normalize(composeBuffer.toString(), Normalizer.Form.NFC);
-    				if (composed.equals("")) {
+    				if ("".equals(composed)) {
     					return true; // incomplete :-)
     				}
     			} else {

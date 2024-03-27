@@ -94,22 +94,22 @@ public class InputLanguageSelection extends PreferenceActivity {
     private static String getLocaleName(Locale l) {
         String lang = l.getLanguage();
         String country = l.getCountry();
-        if (lang.equals("en") && country.equals("DV")) {
+        if ("en".equals(lang) && "DV".equals(country)) {
             return "English (Dvorak)";
-        } else if (lang.equals("en") && country.equals("EX")) {
+        } else if ("en".equals(lang) && "EX".equals(country)) {
                 return "English (4x11)";
-        } else if (lang.equals("es") && country.equals("LA")) {
+        } else if ("es".equals(lang) && "LA".equals(country)) {
             return "Español (Latinoamérica)";
-        } else if (lang.equals("cs") && country.equals("QY")) {
+        } else if ("cs".equals(lang) && "QY".equals(country)) {
             return "Čeština (QWERTY)";
-        } else if (lang.equals("hu") && country.equals("QY")) {
+        } else if ("hu".equals(lang) && "QY".equals(country)) {
             return "Magyar (QWERTY)";
-        } else if (lang.equals("sk") && country.equals("QY")) {
+        } else if ("sk".equals(lang) && "QY".equals(country)) {
             return "Slovenčina (QWERTY)";
-        } else if (lang.equals("ru") && country.equals("PH")) {
+        } else if ("ru".equals(lang) && "PH".equals(country)) {
             return "Русский (Phonetic)";
-        } else if (lang.equals("bg")) {
-            if (country.equals("ST")) {
+        } else if ("bg".equals(lang)) {
+            if ("ST".equals(country)) {
                 return "български език (Standard)";
             } else {
                 return "български език (Phonetic)";
@@ -355,7 +355,7 @@ public class InputLanguageSelection extends PreferenceActivity {
                                 new Loc(getLocaleName(l), l);
                     } else {
                         String displayName;
-                        if (s.equals("zz_ZZ")) {
+                        if ("zz_ZZ".equals(s)) {
                         } else {
                             displayName = getLocaleName(l);
                             preprocess[finalSize++] = new Loc(displayName, l);

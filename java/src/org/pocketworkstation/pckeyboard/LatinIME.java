@@ -539,7 +539,7 @@ public class LatinIME extends InputMethodService implements
                 if (current == XmlResourceParser.START_TAG) {
                     String tag = xrp.getName();
                     if (tag != null) {
-                        if (tag.equals("part")) {
+                        if ("part".equals(tag)) {
                             String dictFileName = xrp.getAttributeValue(null,
                                     "name");
                             dictionaries.add(res.getIdentifier(dictFileName,
@@ -1211,12 +1211,12 @@ public class LatinIME extends InputMethodService implements
             }
             break;
         case KeyEvent.KEYCODE_VOLUME_UP:
-            if (!mVolUpAction.equals("none") && isKeyboardVisible()) {
+            if (!"none".equals(mVolUpAction) && isKeyboardVisible()) {
                 return true;
             }
             break;
         case KeyEvent.KEYCODE_VOLUME_DOWN:
-            if (!mVolDownAction.equals("none") && isKeyboardVisible()) {
+            if (!"none".equals(mVolDownAction) && isKeyboardVisible()) {
                 return true;
             }
             break;
@@ -1251,12 +1251,12 @@ public class LatinIME extends InputMethodService implements
             }
             break;
         case KeyEvent.KEYCODE_VOLUME_UP:
-            if (!mVolUpAction.equals("none") && isKeyboardVisible()) {
+            if (!"none".equals(mVolUpAction) && isKeyboardVisible()) {
                 return doSwipeAction(mVolUpAction);
             }
             break;
         case KeyEvent.KEYCODE_VOLUME_DOWN:
-            if (!mVolDownAction.equals("none") && isKeyboardVisible()) {
+            if (!"none".equals(mVolDownAction) && isKeyboardVisible()) {
                 return doSwipeAction(mVolDownAction);
             }
             break;
@@ -1488,10 +1488,10 @@ public class LatinIME extends InputMethodService implements
         EditorInfo ei = getCurrentInputEditorInfo();
         String pkg = ei.packageName;
         if (ei == null || pkg == null) return false;
-        return ((pkg.equalsIgnoreCase("org.connectbot")
-            || pkg.equalsIgnoreCase("org.woltage.irssiconnectbot")
-            || pkg.equalsIgnoreCase("com.pslib.connectbot")
-            || pkg.equalsIgnoreCase("sk.vx.connectbot")
+        return (("org.connectbot".equalsIgnoreCase(pkg)
+            || "org.woltage.irssiconnectbot".equalsIgnoreCase(pkg)
+            || "com.pslib.connectbot".equalsIgnoreCase(pkg)
+            || "sk.vx.connectbot".equalsIgnoreCase(pkg)
         ) && ei.inputType == 0); // FIXME
     }
 
@@ -3028,13 +3028,13 @@ public class LatinIME extends InputMethodService implements
 
     private boolean doSwipeAction(String action) {
         //Log.i(TAG, "doSwipeAction + " + action);
-        if (action == null || action.equals("") || action.equals("none")) {
+        if (action == null || "".equals(action) || "none".equals(action)) {
             return false;
-        } else if (action.equals("close")) {
+        } else if ("close".equals(action)) {
             handleClose();
-        } else if (action.equals("settings")) {
+        } else if ("settings".equals(action)) {
             launchSettings();
-        } else if (action.equals("suggestions")) {
+        } else if ("suggestions".equals(action)) {
             if (mSuggestionForceOn) {
                 mSuggestionForceOn = false;
                 mSuggestionForceOff = true;
@@ -3047,11 +3047,11 @@ public class LatinIME extends InputMethodService implements
                 mSuggestionForceOn = true;
             }
             setCandidatesViewShown(isPredictionOn());
-        } else if (action.equals("lang_prev")) {
+        } else if ("lang_prev".equals(action)) {
             toggleLanguage(false, false);
-        } else if (action.equals("lang_next")) {
+        } else if ("lang_next".equals(action)) {
             toggleLanguage(false, true);
-        } else if (action.equals("debug_auto_play")) {
+        } else if ("debug_auto_play".equals(action)) {
             if (LatinKeyboardView.DEBUG_AUTO_PLAY) {
                 ClipboardManager cm = ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE));
                 CharSequence text = cm.getText();
@@ -3059,17 +3059,17 @@ public class LatinIME extends InputMethodService implements
                     mKeyboardSwitcher.getInputView().startPlaying(text.toString());
                 }
             }
-        } else if (action.equals("full_mode")) {
+        } else if ("full_mode".equals(action)) {
             if (isPortrait()) {
                 mKeyboardModeOverridePortrait = (mKeyboardModeOverridePortrait + 1) % mNumKeyboardModes;
             } else {
                 mKeyboardModeOverrideLandscape = (mKeyboardModeOverrideLandscape + 1) % mNumKeyboardModes;
             }
             toggleLanguage(true, true);
-        } else if (action.equals("extension")) {
+        } else if ("extension".equals(action)) {
             sKeyboardSettings.useExtension = !sKeyboardSettings.useExtension;
             reloadKeyboards();
-        } else if (action.equals("height_up")) {
+        } else if ("height_up".equals(action)) {
             if (isPortrait()) {
                 mHeightPortrait += 5;
                 if (mHeightPortrait > 70) mHeightPortrait = 70;
@@ -3078,7 +3078,7 @@ public class LatinIME extends InputMethodService implements
                 if (mHeightLandscape > 70) mHeightLandscape = 70;                
             }
             toggleLanguage(true, true);
-        } else if (action.equals("height_down")) {
+        } else if ("height_down".equals(action)) {
             if (isPortrait()) {
                 mHeightPortrait -= 5;
                 if (mHeightPortrait < 15) mHeightPortrait = 15;
@@ -3315,11 +3315,11 @@ public class LatinIME extends InputMethodService implements
     private void checkTutorial(String privateImeOptions) {
         if (privateImeOptions == null)
             return;
-        if (privateImeOptions.equals("com.android.setupwizard:ShowTutorial")) {
+        if ("com.android.setupwizard:ShowTutorial".equals(privateImeOptions)) {
             if (mTutorial == null)
                 startTutorial();
-        } else if (privateImeOptions
-                .equals("com.android.setupwizard:HideTutorial")) {
+        } else if ("com.android.setupwizard:HideTutorial"
+                .equals(privateImeOptions)) {
             if (mTutorial != null) {
                 if (mTutorial.close()) {
                     mTutorial = null;
@@ -3441,7 +3441,7 @@ public class LatinIME extends InputMethodService implements
         mSuggestPuncList = new ArrayList<CharSequence>();
         String suggestPuncs = sKeyboardSettings.suggestedPunctuation;
         String defaultPuncs = getResources().getString(R.string.suggested_punctuations_default);
-        if (suggestPuncs.equals(defaultPuncs) || suggestPuncs.equals("")) {
+        if (suggestPuncs.equals(defaultPuncs) || "".equals(suggestPuncs)) {
             // Not user-configured, load the language-specific default.
             suggestPuncs = getResources().getString(R.string.suggested_punctuations);
         }
